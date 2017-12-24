@@ -23,3 +23,10 @@
 h1 {
   text-align: center;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 16px;
+}

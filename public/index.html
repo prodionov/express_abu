@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
 <header>
-  <link href="public/style.css" rel="stylesheet" type="text/css" />
+  <link href="/css/style.css" rel="stylesheet" type="text/css" />
 </header>
 
 <body>
   <div class="navbar" id="navbar">
     <a class="article" href="/addArticle">Add Aricle</a>
-    <a class="logIn" href="/logIn">Log In</a>
+    <a class="logIn" id="login" href="#">Log In</a>
+    <div id="modal" class="modal">
+      <span class="close">&times;</span>
+      <form action="/login">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+        <input type="submit" />
+      </form>
+      <a href="/signup">Sign Up</a>
+    </div>
   </div>
+
   <h1>abu shabab voice</h1>
 </body>
-
+<script src="/index.js"></script>
 </html>

@@ -6,20 +6,29 @@
 
 <body>
   <div class="navbar" id="navbar">
-    <a class="article" href="/addArticle">Add Aricle</a>
-    <a class="logIn" id="login" href="#">Log In</a>
+    <ul>
+      <li class="left"><a class="article" id="add_article"href="/addArticle">Add Aricle</a></li>
+      <li class="left"><a class="about" id="about" href="/about">About</a></li>
+      <li class="right"><a class="search" id="search" href="#">Search</a></li>
+      <li class="right"><a class="logIn" id="login" href="#">Log In</a></li>
+    </ul>
     <div id="modal" class="modal">
-      <span class="close">&times;</span>
-      <form action="/login">
-        <input type="text" name="username" />
-        <input type="password" name="password" />
-        <input type="submit" />
-      </form>
-      <a href="/signup">Sign Up</a>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form action="/login">
+          <label for="su_username">Username</label>
+          <input type="text" name="username" id="su_username" />
+          <label for="su_password">Password</label>
+          <input type="password" name="password" id="su_password" />
+          <input type="submit" class="submit" />
+        </form>
+        <a href="/signup" id="signup_but" class="signup_but">Sign Up</a>
+      </div>
     </div>
   </div>
 
   <h1>abu shabab voice</h1>
 </body>
 <script src="/index.js"></script>
+
 </html>

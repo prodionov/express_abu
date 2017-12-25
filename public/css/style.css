@@ -1,6 +1,13 @@
-.navbar {
-  background-color: #333;
-  overflow: hidden;
+h1 {
+  text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
 }
 
 .navbar a{
@@ -11,22 +18,48 @@
     font-size: 17px;
 }
 
-.navbar a.article{
+li {
   float:left;
+}
+
+li a {
+  display: block;
+  padding:14px, 16px
+}
+
+.navbar a.article{
   display: none;
 }
 
-.navbar a.logIn {
-  float:right;
-}
-
-h1 {
-  text-align: center;
+.right {
+  float: right;
 }
 
 .modal {
   display: none;
   position: fixed;
+  background-color: #babdc1;
   z-index: 1;
+  margin-top: 50px;
   padding-top: 16px;
+  width: 200px;
+  height: 300px;
+  overflow: auto;
+  right: 10px;
+  border-radius: 20px;
+}
+
+.modal-content {
+  margin: 15% auto;
+  padding: 20px;
+  background-color: #d5dce5;
+}
+
+.signup_but:link, .signup:visited {
+  background-color: #172844;
+  border-radius: 10px;
+  color: white;
+  padding: 14px 25px;
+  text-align: center;
+  display: inline-block;
 }

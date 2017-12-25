@@ -6,6 +6,17 @@ var span = document.getElementsByClassName("close")[0];
 
 console.log('span:', span);
 
-login.addEventListener('onclick', function() {
-  login.style.display = "block";
-})
+login.addEventListener('click', function() {
+  console.log(login.style);
+  modal.style.display = "block";
+});
+
+span.addEventListener('click', function() {
+  modal.style.display = "none";
+});
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}

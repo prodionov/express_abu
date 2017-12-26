@@ -6,11 +6,15 @@
 
 <body>
   <h1>abu shabab voice</h1>
-  <form action="/signup" method="post">
-    <input type="text" name="username" placeholder="assad" />
-    <input type="email" name="email" placeholder="sam.smith@google.com" />
-    <input type="password" name="password" />
-    <input type="password" />
+  <form action="/signup_submit" method="post">
+    <label for="su_username">Username</label>
+    <input type="text" name="username" placeholder="assad" id="su_username"/>
+    <label for="su_email">Email</label>
+    <input type="email" name="email" placeholder="sam.smith@google.com" id="su_email"/>
+    <label for="su_password">Password</label>
+    <input type="password" name="password" id="su_password"/>
+    <label for="su_pwd_confirm">Confirm Password</label>
+    <input type="password" id="su_pwd_confirm"/>
     <input type="submit" />
   </form>
 </body>

@@ -27,6 +27,10 @@ li a {
   padding:14px, 16px
 }
 
+label {
+  display: block;
+}
+
 .navbar a.article{
   display: none;
 }

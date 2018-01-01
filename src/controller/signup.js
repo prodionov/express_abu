@@ -7,7 +7,9 @@ su_router.post("/", async (req, res, next) => {
   console.log("data", data);
   try {
     await add_user(data);
+    //console.log('we are here');
   } catch (err) {
+    console.log('error', err);
     let error = err.detail;
     if (
       error.includes("username") &&
@@ -30,6 +32,8 @@ su_router.post("/", async (req, res, next) => {
       next();
     }
   }
+  res.redirect('/');
+  next();
 });
 
 module.exports = su_router;

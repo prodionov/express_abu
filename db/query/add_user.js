@@ -1,15 +1,35 @@
 const connect = require("../db_connection");
-const gen_salt = require("../../src/auth/pwd_encrypt");
+const gen_pwd = require("../../src/auth/pwd_encrypt");
 
-console.log(gen_salt());
+q_check_username = "SELECT * FROM users WHERE username = $1";
+q_check_email = "SELECT * FROM users WHERE email = $1";
+q_insert = "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)";
 
-const add_user = async (data) => {
-  await gen_salt()
-    .then((salt) => {return connect.query(
-        "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
-        [data.username, data.email, salt])
+const check = async data => {
+  await Promise.all([
+    connect.query(q_check_username, [data.username]),
+    connect.query(q_check_email, [data.email])
+  ])
+    .then(results => {
+      return new Promise((resolve, reject) => {
+        if (results[0].rowCount > 0) {
+          throw new Error("user with that name already exist");
+        } else if (results[1].rowCount > 0) {
+          throw new Error("user with that email already exist");
+        } else {
+          resolve(data);
+        }
+      });
     })
-    .catch(err => console.log('errorium', err.stack))
-}
+    .then((data) => {return add_user(data)})
+    .catch((err) => {return Promise.reject(err)});
+};
 
-module.exports = add_user;
+const add_user = async data => {
+  await gen_pwd(data.password).then(hash => {
+    return connect.query(q_insert, [data.username, data.email, hash]);
+  })
+  .catch((err) => {return Promise.reject(err)});
+};
+
+module.exports = { add_user, check };

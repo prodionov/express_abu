@@ -1,28 +1,24 @@
 const express = require("express");
 const su_router = express.Router();
-const add_user = require("../../db/query/add_user");
+const { add_user, check } = require("../../db/query/add_user");
 
 su_router.post("/", async (req, res, next) => {
   let data = req.body;
   console.log("data", data);
   try {
-    await add_user(data);
-    //console.log('we are here');
+    await check(data);
+    console.log("USER SUSSESFULLY ADDED");
+    res.redirect("/");
   } catch (err) {
-    console.log('error', err);
-    let error = err.detail;
-    if (
-      error.includes("username") &&
-      error.includes("already exists")
-    ) {
+    console.log("type of error", typeof err);
+    console.log("error", err.message);
+    let db_response = err.message;
+    if (db_response === "user with that name already exist") {
       //make an injection into the signup.html that the user with this name already exist
       console.log("we are here - username");
       res.redirect("/signup");
       next();
-    } else if(
-      error.includes("email") &&
-      error.includes("already exists")
-    ) {
+    } else if (db_response === "user with that email already exist") {
       console.log("we are here - email");
       //make an injection into the signup.html that the user with this name already exist
       res.redirect("/signup");
@@ -32,8 +28,6 @@ su_router.post("/", async (req, res, next) => {
       next();
     }
   }
-  res.redirect('/');
-  next();
 });
 
 module.exports = su_router;

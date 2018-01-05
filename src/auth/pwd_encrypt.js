@@ -1,27 +1,14 @@
-const bcrypt = require('bcryptjs');
-
+const bcrypt = require("bcryptjs");
 const rounds = 10;
 
-// var gen_salt = (pwd) => new Promise( (resolve, reject) => {
-//   bcrypt.genSalt(10, (err, salt) => {
-//     console.log('salt:', salt);
-//     if(err) {
-//       reject(err);
-//     }
-//     else{
-//       resolve(salt)
-//     }
-//   })
-//   // console.log('hash', hash);
-//   // if(hash) {
-//   //   resolve(hash);
-//   // }
-// });
+var gen_pwd = password => {
+  return bcrypt.hash(password, rounds);
+};
 
-var gen_salt = () => {
-    return bcrypt.genSalt(10);
+var auth_pwd = (password, hash) => {
+  return bcrypt.compare(password, hash)
 }
 
 //salt('test').then(console.log('salt was generated'));
 
-module.exports = gen_salt;
+module.exports = {gen_pwd, auth_pwd};

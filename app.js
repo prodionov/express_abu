@@ -4,6 +4,7 @@ const app = express();
 const port = 5000;
 const router = require("./src/controller/router");
 const su_router = require("./src/controller/signup");
+const log_router = require("./src/controller/login");
 const morgan = require("morgan");
 const fs = require("fs");
 const bodyParser = require("body-parser");
@@ -15,6 +16,11 @@ app.disable("x-powered-by");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use((req, res, next) => {
+  console.log('url requested', req.url);
+  next();
+})
+
 //create a write stream in append mode
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, "logs-demo", "access.log"),
@@ -25,6 +31,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(router);
 app.use('/signup_submit',su_router);
+app.use('/login_submit', log_router);
 
 //handling errors
 app.use((err, req, res, next) => {

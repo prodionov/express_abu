@@ -15,12 +15,12 @@
     <div id="modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <form action="/login">
+        <form action="/login_submit" method="post">
           <label for="su_username">Username</label>
           <input type="text" name="username" id="su_username" />
           <label for="su_password">Password</label>
           <input type="password" name="password" id="su_password" />
-          <input type="submit" class="submit" />
+          <input type="submit" class="submit" id="login_but"/>
         </form>
         <a href="/signup" id="signup_but" class="signup_but">Sign Up</a>
       </div>

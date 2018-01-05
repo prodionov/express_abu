@@ -1,5 +1,5 @@
 const connect = require("../db_connection");
-const gen_pwd = require("../../src/auth/pwd_encrypt");
+const { gen_pwd } = require("../../src/auth/pwd_encrypt");
 
 q_check_username = "SELECT * FROM users WHERE username = $1";
 q_check_email = "SELECT * FROM users WHERE email = $1";
@@ -21,15 +21,22 @@ const check = async data => {
         }
       });
     })
-    .then((data) => {return add_user(data)})
-    .catch((err) => {return Promise.reject(err)});
+    .then(data => {
+      return add_user(data);
+    })
+    .catch(err => {
+      return Promise.reject(err);
+    });
 };
 
 const add_user = async data => {
-  await gen_pwd(data.password).then(hash => {
-    return connect.query(q_insert, [data.username, data.email, hash]);
-  })
-  .catch((err) => {return Promise.reject(err)});
+  await gen_pwd(data.password)
+    .then(hash => {
+      return connect.query(q_insert, [data.username, data.email, hash]);
+    })
+    .catch(err => {
+      return Promise.reject(err);
+    });
 };
 
 module.exports = { add_user, check };

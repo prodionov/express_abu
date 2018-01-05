@@ -28,8 +28,6 @@ su_router.post("/", async (req, res, next) => {
       next();
     }
   }
-
-  // next();
 });
 
 module.exports = su_router;
